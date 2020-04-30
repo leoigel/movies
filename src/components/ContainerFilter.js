@@ -22,4 +22,5 @@ const Container = styled(ConteinerFilterMaterialUI)`
 display:flex;
 flex-wrap:wrap;
 justify-content:flex-start;
+margin:10px;
 `

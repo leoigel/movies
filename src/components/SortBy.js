@@ -8,7 +8,6 @@ const SortBy = () => {
     return (
         <>
             <Div>
-                <H3>Sort By</H3>
                 <Select onChange={(e) => sort_by(setSortInput(e.target.value))}>
                     {optionsTofilterDescOrAsc.map((option, index) => {
                         return (

@@ -1,30 +1,7 @@
-// import React from 'react';
-// import { H3, Select, Option } from '../ui/ButtonFilter';
 
-// const Genres = () => {
-//     const {handleGenresData,genres} = useMovies()
-//     return (
-//         <>
-//             <H3>Genres</H3>
-//             <Select  onChange={(e) => handleGenresData(e.target.value,genres)}>
-//                 {
-//                     genres && (
-//                         genres.map((genre) => {
-//                             return <Option key={genre.id}>{genre.name}</Option>
-//                         })
-//                     )
-//                 }
-//             </Select>
-//         </>
-//     )
-// }
-// export default Genres;
-
-
-/* eslint-disable no-use-before-define */
-import React,{useRef} from 'react';
+import React, { useRef } from 'react';
 import useAutocomplete from '@material-ui/lab/useAutocomplete';
-import { H3 } from '../ui/ButtonFilter';
+import { H3, Div } from '../ui/ButtonFilter';
 import NoSsr from '@material-ui/core/NoSsr';
 import useMovies from '../hooks/useMovies';
 import CloseIcon from '@material-ui/icons/Close';
@@ -33,8 +10,8 @@ import styled from 'styled-components';
 
 
 export default function Genres() {
-    const {handleGenresData,deleteFromGernes,genres} = useMovies()
-    const inputRef = useRef();
+  const { handleGenresData, deleteFromGernes, genres } = useMovies()
+  const inputRef = useRef();
   const {
     getRootProps,
     getInputLabelProps,
@@ -53,64 +30,67 @@ export default function Genres() {
   });
 
   return (
-    <NoSsr >
-      <div >
-        <div {...getRootProps()} >
-          <H3 {...getInputLabelProps()}>Genres</H3>
-          <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''} >
-            {value.map((option, index) => (
-                
-              <Tag label={option.name} {...getTagProps({ index })}  onClick={() => deleteFromGernes(value,option)}/>
-            ))}
+    <Div>
+      <NoSsr >
+        <div >
+          <div {...getRootProps()} >
+            {/* <H3 {...getInputLabelProps()}>Genres</H3> */}
+            <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''} >
+              {value.map((option, index) => (
 
-            <input {...getInputProps()} />
-          </InputWrapper>
+                <Tag label={option.name} {...getTagProps({ index })} onClick={() => deleteFromGernes(value, option)} />
+              ))}
+
+              <input {...getInputProps()} />
+            </InputWrapper>
+          </div>
+          {groupedOptions.length > 0 ? (
+            <Listbox {...getListboxProps()} ref={inputRef} onClick={(e) => {
+              inputRef.current = e.target.textContent
+              return handleGenresData(inputRef.current, genres)
+            }}>
+              {groupedOptions.map((option, index) => (
+                <li {...getOptionProps({ option, index })}>
+                  <span>{option.name}</span>
+                </li>
+              ))}
+            </Listbox>
+          ) : null}
         </div>
-        {groupedOptions.length > 0 ? (
-          <Listbox {...getListboxProps()} ref={inputRef}  onClick={(e) => {
-             inputRef.current = e.target.textContent
-             return handleGenresData(inputRef.current,genres)
-          }}>
-            {groupedOptions.map((option, index) => (
-              <li {...getOptionProps({ option, index })}>
-                <span>{option.name}</span>
-              </li>
-            ))}
-          </Listbox>
-        ) : null}
-      </div>
-    </NoSsr>
+      </NoSsr>
+    </Div>
   );
 }
 
-// const Label = styled('label')`
-//   padding: 0 0 4px;
-//   line-height: 1.5;
-//   display: block;
-// `;
 
-const InputWrapper = styled('div')`
-  width: 300px;
-  border: 1px solid #d9d9d9;
-  background-color: #fff;
-  border-radius: 4px;
-  padding: 1px;
-  display: flex;
-  flex-wrap: wrap;
+
+const InputWrapper = styled.div`
+width: 300px;
+border: 1px solid #d9d9d9;
+font-size: 16px;
+font-family: sans-serif;
+font-weight: 500;
+background-color: #fff;
+border-radius: 4px;
+border: 1px solid #aaa;
+box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+padding: 1px;
+display: flex;
+flex-wrap: wrap;
 
   &:hover {
     border-color: #40a9ff;
   }
 
-  &.focused {
-    border-color: #40a9ff;
-    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
-  }
+
 
   & input {
-    font-size: 14px;
-    height: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    padding: .6em 1.4em .5em .8em;
+    height: 35px;
     box-sizing: border-box;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
     padding: 4px 6px;
     width: 0;
     min-width: 30px;
@@ -124,7 +104,7 @@ const InputWrapper = styled('div')`
 const Tag = styled(({ label, onDelete, ...props }) => (
   <div {...props}>
     <span>{label}</span>
-    <CloseIcon onClick={onDelete}/>
+    <CloseIcon onClick={onDelete} />
   </div>
 ))`
   display: flex;

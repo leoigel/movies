@@ -1,60 +1,112 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import useMovies from '../hooks/useMovies';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import BoxFavorite from './BoxFavorite';
+import '../css/style.css';
 import {
     Container,
     CardsContainer,
-    ConteinerContent,
     ContainerInformation,
-    Info,
     ContainerDetails,
     Date,
-    Overview,
-    MoreInfo,
-    Divider,
     ImgContainer,
     ImgNotFound,
     Title,
-    VoteAverage
+    Div,
+    VoteAverage,
+    Percent,
+    Info,
+
 } from '../ui/MovieCardUI';
-import resumeOverView from '../utlits/resumeOverView';
 import moment from 'moment';
-const Cards = ({data}) => {
-     const {windowDimensions } = useMovies();
+import styled from 'styled-components';
+
+const Cards = ({ data }) => {
+    const { windowDimensions, setFavoritesCard, newData } = useMovies();
     const { width } = windowDimensions;
+    const [open, setOpen] = useState(true);
+    const [id, setId] = useState({});
+    const favorites = useRef([]);
+
+
+    const addFavorites = (card) => {
+        setOpen(!open)
+        return setId({ ...card, open })
+    }
+    const addCardToFavorite = (card) => {
+        favorites.current.push(card);
+        favorites.current = favorites.current.filter((elem, index, self) => {
+            return index === self.indexOf(elem);
+        })
+        setFavoritesCard([...favorites.current])
+    }
+
+
+
+
+
+
     return (
-        <>
-            <Container width={width}>
-                {Object.keys(data).length !== 0 && (
-                    data.results.map((card, index) => {
+        <Container>
+            {
+                newData.current && (
+                    newData.current.map((card, index) => {
                         return (
-                            <CardsContainer key={index} width={width}>
-                                <ConteinerContent>
-                                    <ImgContainer>
-                                        {card.poster_path ? <img style={{ display: 'block', height: '278px',width:'200px',minWidth:'100%' }} src={`${`https://image.tmdb.org/t/p/original/${card.poster_path}`}`} /> : <ImgNotFound />}
+                            <>
+                                <CardsContainer key={card.id} width={width}>
+                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                        <Info onClick={() => addFavorites(card)}>
+                                            <MoreHorizIcon />
+                                        </Info>
+                                        {id.id === card.id && id.open ? (
+                                            <BoxFavorite card={card} />
+                                        ) : null}
+                                    </div>
+                                    <ImgContainer onClick={() => addCardToFavorite(card)}>
+                                        {card.backdrop_path ? <img style={{ display: 'block', height: '274px', width: '20px', minWidth: '100%', borderRadius: '10px 10px 0px 0px' }} src={`${`https://image.tmdb.org/t/p/original/${card.backdrop_path}`}`} alt='card-img' /> : <ImgNotFound />}
+                                        <HeartIcon>
+                                            <i class="fas fa-thumbs-up"></i>
+                                        </HeartIcon>
                                     </ImgContainer>
                                     <ContainerInformation>
                                         <ContainerDetails>
-                                            <VoteAverage>{card.vote_average}</VoteAverage>
-                                            <div>
-                                                <Title>{card.title}</Title>
+                                            <VoteAverage>{card.vote_average}<Percent>%</Percent></VoteAverage>
+                                            <Div>
                                                 <Date>{`${moment(card.release_date).format('LL')}`}</Date>
-                                            </div>
+                                                <Title>{card.title}</Title>
+                                            </Div>
                                         </ContainerDetails>
-                                        <Overview>{resumeOverView(card.overview)}</Overview>
-                                        <Info>
-                                            <Divider />
-                                            <MoreInfo>More Info</MoreInfo>
-                                        </Info>
                                     </ContainerInformation>
-                                </ConteinerContent>
-                            </CardsContainer>
+                                </CardsContainer>
+                            </>
                         )
                     }
-                    ))}
-            </Container>
-        </>
+                    ))
+            }
+        </Container>
+
+
+
     )
 }
 
 export default Cards;
 
+const HeartIcon = styled.i`
+position:absolute;
+left:50%;
+top:50%;
+transform: translate(-50%, -50%);
+font-size:30px;
+i {
+    color: #4c6ef5;
+    opacity:0;
+    padding:30px;
+    transition: all 2s;
+    &:hover {
+        opacity:0.8;
+        transform: scale(1.6);
+        color: #4c6ef5;
+    }
+}
+`

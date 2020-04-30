@@ -5,17 +5,16 @@ import SearchIcon from '@material-ui/icons/Search';
 import CreatePopularyMovies from './CreatePopularyMovies';
 import useMovies from '../hooks/useMovies';
 import Menu from './Menu';
-import Pages from './Pages';
 import Cards from './Cards';
 import ContainerFilter from './ContainerFilter';
+import InfiniteLoading from './InfiniteLoading';
 
-const Home = ({location,match}) => {
-    const { filterMoviesSearch, valueInput,dataMovie, windowDimensions  } = useMovies();
-    // console.log(location)
+const Home = () => {
+    const { filterMoviesSearch, valueInput,dataMovie,setValueInput  } = useMovies();
     return (
         <>
-            <Menu />
-            <Container>
+            <Menu />  
+            <Container >
                 <ContainerFilter />
                 <ContainerOfInputSearch>
                     <SearchIcon />
@@ -23,14 +22,15 @@ const Home = ({location,match}) => {
                         variant="standard"
                         placeholder="Seach Movie"
                         fullWidth
-                        onChange={(e) => filterMoviesSearch(e.target.value)}
+                        onChange={(e) => {
+                            setValueInput(e.target.value)
+                        }}
                         value={valueInput}
                     />
                 </ContainerOfInputSearch>
-
                 <CreatePopularyMovies />
                 <Cards data={dataMovie}/>
-                <Pages />
+                <InfiniteLoading />
             </Container>
         </>
     )
@@ -43,8 +43,8 @@ margin-top:93px;
 `
 const ContainerOfInputSearch = styled.div`
 display:flex;
-// padding-top:30px;
 `
 const TextField = styled(TextFieldMaterialUI)`
 flex-grow:2
+
 `

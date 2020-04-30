@@ -1,55 +1,54 @@
 import React from 'react';
-import { CardsContainer as CardsContainerPerson, ImgVerticalNotfound as ImgVerticalNotfoundPerson } from '../ui/MovieCardUI';
-import { Container } from '../ui/MovieCardUI';
+import { ImgVerticalNotfound, CardsContainer, Size, Container, DivDetails, Title, ReleaseDate, Paragraph } from '../ui/StyleCategory';
+import { withRouter,Redirect} from 'react-router-dom';
 import useMovies from '../hooks/useMovies';
-import styled from 'styled-components';
-// import { CircularProgress } from '@material-ui/core';
-const PersonCard = ({ person }) => {
-    const { results } = person;
-    {/* <p>{personCard.known_for[0].original_title}</p> */ }
+import getCategory from '../utlits/getCategory';
+import MovingForm from './MovingForm';
+import {H1} from '../ui/ButtonFilter';
+import '../css/style.css';
+const PersonCard = ({ match }) => {
+    const { searchDataMovie, windowDimensions } = useMovies();
+    const { width } = windowDimensions;
+    const personCategory = getCategory(searchDataMovie, match.params.category);
+    if(!personCategory) {
+      return  <Redirect to='/' />
+    }
+    const { person } = personCategory;
     return (
 
-        <>
+        <div style={{ width: '100vw', display: 'flex', justifyContent: 'center' }}>
             <Container>
-                {results.map((personCard, index) => {
-                    return (
-                        <Size key={index}>
-                            <CardsContainer>
-                                <ContentPerson>
-                                    {personCard.profile_path ? <img src={`${`https://image.tmdb.org/t/p/w45/${personCard.profile_path}`}`} /> : <ImgVerticalNotfound />}
-                                    <H1>{personCard.name}</H1>
-                                    <H2>{personCard.known_for_department}</H2>
-                                </ContentPerson>
-                            </CardsContainer>
-                        </Size>
-                    )
-                })
-                }
+                {width >= 630 && <MovingForm />}
+                <div style={{ flexGrow: '3' }}>
+                    {
+
+                        person && person.length !== 0 ? person.map((person, index) => {
+                            return (
+                                person.known_for.map((personKnown_for, index) => {
+                                    return (
+                                        <Size key={index}>
+                                            <CardsContainer>
+                                                {personKnown_for.poster_path ? <img src={`${`https://image.tmdb.org/t/p/w92/${personKnown_for.poster_path}`}`} alt='movie-card' /> : <ImgVerticalNotfound />}
+                                                <DivDetails>
+                                                    <div>
+                                                        <Title>{personKnown_for.title}</Title>
+                                                        <ReleaseDate>{personKnown_for.release_date}</ReleaseDate>
+                                                    </div>
+                                                    <Paragraph>{personKnown_for.overview}</Paragraph>
+                                                </DivDetails>
+                                            </CardsContainer>
+                                        </Size>
+                                    )
+                                })
+
+                            )
+                        }) : <H1>This content is not available</H1>
+                    }
+                </div>
             </Container>
-        </>
+        </div>
     )
 }
 
-export default PersonCard;
+export default withRouter(PersonCard);
 
-const ContentPerson = styled.div`
-display:flex;
-`
-const Size = styled.div`
-width:100%;
-`
-const ImgVerticalNotfound = styled(ImgVerticalNotfoundPerson)`
-width:45px;
-height:68px;
-`
-const CardsContainer = styled(CardsContainerPerson)`
-height:68px;
-`
-const H1 = styled.h1`
-font-size:1.4em;
-font-weight: 600;
-`
-const H2 = styled.h2`
-font-size:1em;
-font-weight: 400;
-`

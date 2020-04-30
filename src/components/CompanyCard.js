@@ -1,43 +1,46 @@
 import React from 'react';
-import { ImgVerticalNotfound, Container, CardsContainer } from '../ui/MovieCardUI';
-import { Container as ContainerMaterialIU } from '@material-ui/core';
-import styled from 'styled-components';
+import {ImgVerticalNotfound,CardsContainer,Size,Container} from '../ui/StyleCategory';
+import { H3 } from '../ui/ButtonFilter';
+import {withRouter,Redirect} from 'react-router-dom'
 import useMovies from '../hooks/useMovies';
-const CompanyCard = ({ company }) => {
-    const { results } = company;
+import getCategory from '../utlits/getCategory';
+import MovingForm from './MovingForm';
+import {H1} from '../ui/ButtonFilter';
+import '../css/style.css'
+const CompanyCard = ({match}) => {
+    const { searchDataMovie,windowDimensions} = useMovies();
+    const { width } = windowDimensions;
+    const companyCategory = getCategory(searchDataMovie,match.params.category);
+    if(!companyCategory) {
+        return <Redirect to='/' />
+    }
+    const { company } = companyCategory;
     return (
-
-        <Div>
             <Container>
+                {width >= 630 && <MovingForm />}
+                <div style={{flexGrow:'3'}}>
                 {
-                    results.map((companyCard,index) => {
-                        return (
-                            <Size key={index}>
-                                <CardsContainer>
-                                    <ContainerImg>
-                                        {companyCard.logo_path ? <img src={`${`https://image.tmdb.org/t/p/w185/${companyCard.logo_path}`}`} /> : <ImgVerticalNotfound />}
-                                        <h3>{companyCard.name}</h3>
-                                    </ContainerImg>
-                                </CardsContainer>
-                            </Size>
-                        )
-                    })
+                    company && company.length !== 0 ? (
+                        company.map((companyCard, index) => {
+                            console.log(companyCard)
+                            return (
+                               
+                                    <Size key={index}>
+                                    <CardsContainer>
+                                            {companyCard.logo_path ? <img src={`${`https://image.tmdb.org/t/p/w185/${companyCard.logo_path}`}`} /> : <ImgVerticalNotfound />}
+                                            <H3>{companyCard.name}</H3>
+                                    </CardsContainer>
+                                </Size>
+                               
+                            )
+                        }) 
+                    ) : <H1>This content is not available</H1>
                 }
+                </div>
             </Container>
-        </Div>
+     
     )
 }
 
-export default CompanyCard;
+export default withRouter(CompanyCard);
 
-const ContainerImg = styled(ContainerMaterialIU)`
-display:flex;
-flex-direction:column;
-`
-const Div = styled.div`
-display:flex;
-flex-wrap:wrap;
-`
-const Size = styled.div`
-width:300px;
-`

@@ -1,27 +1,38 @@
-import React, { useState, useEffect,useRef } from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
+import useDebounce from './hooks/useDebounce';
 export const Context = React.createContext();
-
 
 const MoviesProvider = ({ children }) => {
     const [dataMovie, setDataMovie] = useState({});
-    const [listMovies, setListMovies] = useState([]);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(4);
     const [valueInput, setValueInput] = useState('');
     const [year, setYear] = useState('2020');
     const [genres, setGenres] = useState([]);
     const [genresData, setGenresData] = useState('28');
     const [sortInput, setSortInput] = useState('');
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-    
+    const [validateSearch, setValidateSearch] = useState(false);
+    const [searchDataMovie, setSearchDataMovie] = useState([])
+    const [getMovie, setGetMovie] = useState({})
+    const [inProp, setInProp] = useState(false);
+    const [stars, setStars] = useState([]);
+    const [upLoadedImage, setUpLoadedImage] = useState('http://i.pravatar.cc/500?img=7');
+    const [favoritesCards, setFavoritesCard] = useState([]);
+    const newData = useRef([]);
+    const [categoryMoving, setCategoryMoving] = useState(null)
+    const [querys, setQuerys] = useState([]);
+    const [isSearching, setIsSearching] = useState(false);
+    const debouncedSearchTerm = useDebounce(valueInput, 500);
+  
+
     useEffect(() => {
         function handleResize() {
-          setWindowDimensions(getWindowDimensions());
+            setWindowDimensions(getWindowDimensions());
         }
-    
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-      }, [windowDimensions]);
+    }, [windowDimensions]);
+
     useEffect(() => {
         async function init() {
             const genresObj = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=d98ee9811e179187b61f0f6b83bb3918&language=en-US`);
@@ -36,26 +47,68 @@ const MoviesProvider = ({ children }) => {
         async function createGeneralData() {
             const data = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=d98ee9811e179187b61f0f6b83bb3918&language=en-US&sort_by=${sortInput}&page=${page}&year=${year}&with_genres=${genresData}`);
             const responseData = await data.json();
-            selectYear(responseData.results,responseData)
-            setDataMovie((movie) => {
+             newData.current.push(...responseData.results)
+           
+            // setInProp(!inProp)
+           
+            setDataMovie((dataMovie) => {
                 return {
-                    ...movie,
-                    page:page,
-                    total_results:responseData.total_results,
-                    totalPage:responseData.totalPage,
-                    results:responseData.results
+                    ...dataMovie,
+                    page: page,
+                    total_results: responseData.total_results,
+                    totalPage: responseData.totalPage,
+                    results: newData.current.reverse(),
                 }
+
             })
+            // selectYear(responseData.results, responseData)
+            return () => {
+                console.log("cleaned up");
+                console.log(dataMovie)
+                console.log(newData.current)
+                // if(newData.current.length >= 80) {
+                //     newData.current = [];
+                // }
+            }
+            
         }
+        
         createGeneralData()
-    },[page,year,genresData,sortInput]);
-    
-   function getWindowDimensions() {
+    }, [page, year, genresData, sortInput]);
+
+    useEffect(
+        () => {
+            if (debouncedSearchTerm) {
+                setIsSearching(true);
+                searchCharacters(debouncedSearchTerm).then(results => {
+                    setIsSearching(false);
+                    setQuerys(results);
+
+                });
+            } else {
+                setQuerys([]);
+            }
+        },
+        [debouncedSearchTerm]
+    );
+
+    function searchCharacters(search) {
+
+        const query = fetch(`https://api.themoviedb.org/3/search/movie?api_key=d98ee9811e179187b61f0f6b83bb3918&language=en-US&query=${search}&page=1&include_adult=false`).then(r => r.json()).then(r => r.results).catch(error => {
+            console.error(error);
+            return [];
+        });;
+
+        return query;
+    }
+
+
+    function getWindowDimensions() {
         const { innerWidth: width } = window;
         return {
-          width,
+            width,
         };
-      }
+    }
 
     const deleteFromGernes = (value, option) => {
         setGenresData(option.id.toString())
@@ -70,54 +123,60 @@ const MoviesProvider = ({ children }) => {
         setGenresData(titleId.id.toString())
     }
 
-    const selectYear = (results,data) => {
-        const holdChoosedDate = [];
-        results.map((item) => {
-            if (item.release_date.slice(0, 4) === year) {
-                holdChoosedDate.push(item)
-            }
-        })
-        for (let key in data) {
-            if (key === 'results') {
-                data[key] = holdChoosedDate
-            }
-        } 
-        yearChoosed(year)
-    }
-
     const yearChoosed = (value) => {
         setYear(value)
-     
+
     }
-    const pagination = (value) => {
+
+    const pagination = (value, vBoleean) => {
+        // setInProp(vBoleean)
         setDataMovie(movie => {
             return {
                 ...movie,
-                page:setPage(value),
+                page: setPage(value),
             }
         })
     }
-    const filterMoviesSearch = (movie) => {
-        setValueInput(movie)
-        const moviesfiltered = dataMovie.results.filter(title => {
-            return title.original_title.toLowerCase().includes(movie.toLowerCase())
-        })
-        setListMovies(moviesfiltered);
-    }
+  
+    
     return (
         <Context.Provider value={{
-            filterMoviesSearch,
-            listMovies,
             pagination,
             valueInput,
             yearChoosed,
             year,
             genres,
             handleGenresData,
+            genresData,
             deleteFromGernes,
             setSortInput,
+            sortInput,
             dataMovie,
             windowDimensions,
+            validateSearch,
+            setValidateSearch,
+            searchDataMovie,
+            setSearchDataMovie,
+            getMovie,
+            setGetMovie,
+            setPage,
+            page,
+            setDataMovie,
+            inProp,
+            setInProp,
+            upLoadedImage,
+            setUpLoadedImage,
+            stars,
+            setStars,
+            favoritesCards,
+            setFavoritesCard,
+            newData,
+            setValueInput,
+            querys,
+            categoryMoving,
+            setCategoryMoving,
+            newData
+            
         }}>
             {children}
         </Context.Provider>

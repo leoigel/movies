@@ -1,24 +1,28 @@
-import React from 'react'
-import Cards from '../components/Cards';
+import React from 'react';
 import KeyWordsCard from '../components/KeyWordsCard';
 import PersonCard from '../components/PersonCard';
 import CompanyCard from '../components/CompanyCard';
+import MovieCard from '../components/MovieCard';
+import TvCard from '../components/TvCard';
+
 const handleParams = (params, searchDataMovie) => {
+    let data;
     if (params === 'person') {
-        return <PersonCard person={searchDataMovie} />
+        data = <PersonCard person={searchDataMovie} />
     }
-    if (params === 'company') {
-        return <CompanyCard company={searchDataMovie} />
+    else if (params === 'company') {
+        data = <CompanyCard company={searchDataMovie} />
     }
-    if (params === 'keyword') {
-        return <KeyWordsCard keyWords={searchDataMovie} />
+    else if (params === 'keyword') {
+        data = <KeyWordsCard keyWords={searchDataMovie} />
     }
-    if (params === 'movie') {
-        return <Cards data={searchDataMovie} />
+    else if (params === 'movie') {
+        data = <MovieCard data={searchDataMovie} />
     }
-    if (params === 'tv') {
-        return <Cards data={searchDataMovie} />
+    else if (params === 'tv') {
+        data = <TvCard data={searchDataMovie} />
     }
+    return data;
 }
 
 export default handleParams;

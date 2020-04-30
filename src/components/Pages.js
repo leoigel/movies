@@ -8,11 +8,11 @@ const Pages = () => {
     const {pagination,dataMovie } = useMovies();
     const {total_results} = dataMovie;
     return (
-        <>
+       
         <Container>
-        <Pagination count={total_results}  onChange={(e) => pagination(parseInt(e.target.textContent))} />
+        <Pagination count={total_results}  onChange={(e) => pagination(parseInt(e.target.textContent),true)} shape="rounded" />
         </Container>
-        </>
+ 
     )
 }
 

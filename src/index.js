@@ -4,6 +4,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import MoviesProvider from './context';
+import 'normalize.css';
 import './index.css'
 
 ReactDOM.render(

@@ -1,0 +1,42 @@
+
+  i{
+    color: #fc6f20;
+    padding-right: 5px;
+    margin-left: 5px;
+  }
+  
+  .fa-heart:hover::after{
+    position: absolute;
+      margin-top: -4px;
+      margin-left: -20px;
+      content: "❤";
+      font-size: 24px;
+      opacity: 1;
+      animation: hearts .7s ease;
+    
+  } 
+  @keyframes hearts {
+      0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  /* input{
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 18px;
+    border-radius: 15px;
+    border: 1px solid #787878;
+    padding: 5px 5px 5px 10px;
+    transition: 0.2s;
+  }
+  input:focus{
+    outline: none;
+    border: 1px solid #fc6f20;
+  }
+  input::placeholder{
+    color: #bebebe;
+  } */
+
+
+ 
+  
+  
