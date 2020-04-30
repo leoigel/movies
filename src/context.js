@@ -64,11 +64,7 @@ const MoviesProvider = ({ children }) => {
             // selectYear(responseData.results, responseData)
             return () => {
                 console.log("cleaned up");
-                console.log(dataMovie)
-                console.log(newData.current)
-                // if(newData.current.length >= 80) {
-                //     newData.current = [];
-                // }
+            
             }
             
         }
@@ -175,7 +171,8 @@ const MoviesProvider = ({ children }) => {
             querys,
             categoryMoving,
             setCategoryMoving,
-            newData
+            newData,
+            isSearching
             
         }}>
             {children}

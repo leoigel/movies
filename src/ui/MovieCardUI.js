@@ -160,7 +160,7 @@ flex-direction:column;
 const Li = styled(ListItem).attrs({
     component:Link
 })`
-padding:6px 8px 0px 8px;
+// padding:6px 8px 0px 8px;
 background-color:rgba(255,255,255,0.9);
 box-shadow: 0px 0px 2px #888888;
 font-weight:600;

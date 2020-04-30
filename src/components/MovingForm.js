@@ -46,16 +46,16 @@ const MovingForm = ({ match }) => {
 export default withRouter(MovingForm);
 
 const Paper = styled(PaperMaterialUI)`
-position: sticky; 
-display:inline-block;
+position: sticky; ;
 top: 250px;
+display:inline-block
 max-height:280px;
 min-width:220px;
 width:240px;
 max-width:240px;
 margin:10px;
 flex-grow:1;
-background-color: black;
+// background-color: black;
 border: 1px solid rgba(227,227,227, 1);
 border-radius: 8px;
 box-sizing: border-box;
@@ -82,7 +82,7 @@ font-size:18px;
 font-weight: 500;
 
 width: 100%;
-padding: 0 20px;
+padding: 10px 20px;
 font-size: 1em;
 line-height: 1.0em;
 margin: 0;

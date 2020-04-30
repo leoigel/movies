@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container as ContainerMaterialIU, TextField as TextFieldMaterialUI } from '@material-ui/core';
+import { Container as ContainerMaterialIU, TextField as TextFieldMaterialUI,CircularProgress} from '@material-ui/core';
 import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import CreatePopularyMovies from './CreatePopularyMovies';
@@ -9,8 +9,10 @@ import Cards from './Cards';
 import ContainerFilter from './ContainerFilter';
 import InfiniteLoading from './InfiniteLoading';
 
+
 const Home = () => {
-    const { filterMoviesSearch, valueInput,dataMovie,setValueInput  } = useMovies();
+    const {  valueInput,dataMovie,setValueInput,isSearching  } = useMovies();
+
     return (
         <>
             <Menu />  
