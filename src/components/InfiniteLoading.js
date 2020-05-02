@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import Cards from './Cards';
 import useMovies from '../hooks/useMovies';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
 import styled from 'styled-components';
 const InfiniteLoading = () => {
     const {  page, setPage,newData } = useMovies();
@@ -55,7 +56,7 @@ const InfiniteLoading = () => {
         <>
         
             <DIV ref={element}>{arrow ? null : <CircularProgress />}</DIV>
-            {newData.current.length > 0 ? <Button variant="contained" color="primary" onClick={slideUp}><Span>🡹</Span></Button> : null}
+            {newData.current.length > 0 ? <Button variant="contained" color="primary" onClick={slideUp}><Span><i className="fas fa-arrow-up"></i></Span></Button> : null}
         </>
     )
 }
@@ -70,14 +71,12 @@ margin:20px 0px;
 const Button = styled.div`
 position:fixed;
 right: 20px;
-bottom: 0;
 opacity: 0.3;
 background-color: aqua;
 width: 40px;
 height: 40px;
-position: fixed;
 bottom: 10px;
-right: 10px;
+right: 20px;
 border-radius: 5px;
 border: none;
 
@@ -88,8 +87,9 @@ border: none;
 const Span = styled.span`
 color: white;
 display:flex;
+padding:5px;
 justify-content:center;
 align-items:center;
 font-size:30px;
-font-weight:900
+font-weight:900;
 `
