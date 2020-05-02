@@ -5,6 +5,8 @@
     align-items:center;
     justify-content:center;
     background: whitesmoke;
+    border: royalblue solid 1px;
+    height: 100vh;
 }
 
 .Login-Field {

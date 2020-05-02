@@ -49,9 +49,10 @@ const InformationMovie = ({ match }) => {
     
     return (
         <>
-            <Menu />
+           
             {loading ? (
                 <>
+                 <Menu />
                     <ModalInfo info={info} />
                     <CastInfo info={info}/>
                     <Media params={match.params.movieId}/>
@@ -68,7 +69,7 @@ export default InformationMovie;
 
 const DivLoading = styled.div`
 position: absolute;
-top: 50%;
+top: 100px;
 left: 50%;
 transform:translate(-50%, -50%)
 `

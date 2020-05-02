@@ -9,11 +9,10 @@ import MovingForm from './MovingForm';
 import '../css/style.css';
 
 
-const MovieCard = ({ match }) => {
+const MovieCard = ({ match,location }) => {
     const { getMovie,windowDimensions } = useMovies();
     const { width } = windowDimensions;
     const { results: movie } = getMovie;
-
     return (
 
         <div style={{ width: '100vw', display: 'flex', justifyContent: 'center'}}>

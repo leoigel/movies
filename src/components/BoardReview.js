@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
+import useMovies from '../hooks/useMovies';
 import { Container, Paper as PaperMatirialUI } from '@material-ui/core';
 import CommentReview from './CommentReview';
 
 const BoardReview = ({info}) => {
+    const {setReviewsText} = useMovies();
     const [content, setContent] = useState('');
     const [newCommnets, setNewCommnets] = useState([]);
 
@@ -15,13 +17,12 @@ const BoardReview = ({info}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        setNewCommnets([...newCommnets, data])
-        setContent('')
+        setNewCommnets([...newCommnets, data]);
+        setContent('');
     }
     const handleChange = (e) => {
         setContent(e.target.value)
     }
-
 
     return (
         <Container>
@@ -29,7 +30,7 @@ const BoardReview = ({info}) => {
                 <H1>Add Review</H1>
                 <Form onSubmit={(e) => handleSubmit(e)}>
                     <Textarea onChange={handleChange} value={content} style={{ rows: "4", cols: "50", maxlength: "50" }} />
-                    <Button type='submit'>Share</Button>
+                    <Button type='submit' >Share</Button>
                    
                 </Form>
             </Paper>

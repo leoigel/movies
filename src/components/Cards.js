@@ -39,6 +39,7 @@ const Cards = ({ data }) => {
             return index === self.indexOf(elem);
         })
         setFavoritesCard([...favorites.current])
+        localStorage.setItem('cards',JSON.stringify([...favorites.current] ||'[]'))
     }
 
 

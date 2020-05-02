@@ -172,8 +172,7 @@ const MoviesProvider = ({ children }) => {
             categoryMoving,
             setCategoryMoving,
             newData,
-            isSearching
-            
+            isSearching,            
         }}>
             {children}
         </Context.Provider>

@@ -10,9 +10,8 @@ import ContainerFilter from './ContainerFilter';
 import InfiniteLoading from './InfiniteLoading';
 
 
-const Home = () => {
+const Home = ({}) => {
     const {  valueInput,dataMovie,setValueInput,isSearching  } = useMovies();
-
     return (
         <>
             <Menu />  

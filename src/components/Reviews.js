@@ -1,17 +1,17 @@
 import React from 'react';
 import { Container, Paper as PaperMatirialUI } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import getRandomInt from '../utlits/getRandomInt';
 import styled from 'styled-components';
-const Reviews = ({ info,reviewId }) => {
-  
+import ReviewPage from './ReviewPage';
+import useMovies from '../hooks/useMovies';
+const Reviews = ({ info, reviewId}) => {
     const { reviews } = info;
-
     return (
         <Container>
             <h1>Reviews</h1>
 
-            { reviews.results.length !== 0 ? (
+            {reviews.results.length !== 0 ? (
                 reviews.results.map((review, index) => {
                     return (
                         <Paper elevation={3} key={review.id}>
@@ -28,11 +28,16 @@ const Reviews = ({ info,reviewId }) => {
 
                 })
 
-            ) : <Paragraph>There aren't any reviews  yet</Paragraph>}
-            <Link to={`/reviewPage/${reviewId}`}>
-                <Button >Add Review</Button>
-            </Link>
-
+            ) : (
+                    <>
+                        <ReviewPage reviewId={reviewId} reviewAdded/>
+                    </>
+                )}
+            {reviews.results.length !== 0 && (
+                <Link to={`/reviewPage/${reviewId}`}>
+                    <Button >Add Review</Button>
+                </Link>)
+            }
         </Container>
 
     )
@@ -73,13 +78,13 @@ color: #fff;
 const Paragraph = styled.p`
 margin: 0;
 padding: 0;
-box-sizing: border-box;
-display: block;
-margin-block-start: 1em;
-margin-block-end: 1em;
-margin-inline-start: 0px;
-margin-inline-end: 0px;
-font-size: 1em;
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+line-height: 16px;
+max-height: 50px;    
+-webkit-line-clamp: 4;
+-webkit-box-orient: vertical;
 `
 const Button = styled.button`
 font-family: 'Darker Grotesque', sans-serif;

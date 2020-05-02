@@ -3,7 +3,7 @@ import useMovies from '../hooks/useMovies';
 import Menu from './Menu'
 import moment from 'moment';
 import styled from 'styled-components';
-import {H1} from '../ui/ButtonFilter';
+import { H1 } from '../ui/ButtonFilter';
 import {
     Container as ContainerTest,
     CardsContainer,
@@ -20,29 +20,30 @@ import {
 
 } from '../ui/MovieCardUI';
 const FavoritePage = () => {
-    const { favoritesCards, windowDimensions, setFavoritesCard} = useMovies();
+    const {favoritesCards, windowDimensions, setFavoritesCard } = useMovies();
     const { width } = windowDimensions;
+
     const deleteCard = (id) => {
-        const copyFavoritesCards = [...favoritesCards];
-        const newFavoritesCards = copyFavoritesCards.filter(favorites => {
+        const newFavoritesCards =  JSON.parse(localStorage.getItem('cards')).filter(favorites => {
             return favorites.id !== id
         })
-        setFavoritesCard([...newFavoritesCards])
+        localStorage.setItem('cards',JSON.stringify([...newFavoritesCards]||'[]'))
+        setFavoritesCard([...newFavoritesCards]);
+        
     }
+
     return (
         <>
             <Menu />
             <HoldConteiner>
                 <Container width={width}>
-                    {favoritesCards.length > 0 ? (
-                        favoritesCards.map((card, index) => {
+                    {JSON.parse(localStorage.getItem('cards')) && JSON.parse(localStorage.getItem('cards')).length > 0   ?(
+                        JSON.parse(localStorage.getItem('cards')).map((card, index) => {
                             return (
                                 <CardsContainer key={card.id} width={width}>
                                     <ImgContainer>
                                         {card.backdrop_path ? <img style={{ display: 'block', height: '274px', width: '100%', minWidth: '100%', borderRadius: '10px 10px 0px 0px' }} src={`${`https://image.tmdb.org/t/p/original/${card.backdrop_path}`}`} alt='card-img' /> : <ImgNotFound />}
-                                       
-                                            <DeleteIcon className="far fa-trash-alt" onClick={() => deleteCard(card.id)}></DeleteIcon>
-                                       
+                                        <DeleteIcon className="far fa-trash-alt" onClick={() => deleteCard(card.id)}></DeleteIcon>
                                     </ImgContainer>
                                     <ContainerInformation>
                                         <ContainerDetails>

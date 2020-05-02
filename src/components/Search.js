@@ -50,8 +50,6 @@ const Search = ({ location, match }) => {
             </Container>
             {handleParams(match.params.category, searchDataMovie)}
             <GenericFooter />
-
-
         </>
     )
 }
