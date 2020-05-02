@@ -33,7 +33,7 @@ const ReviewPage = ({ match,reviewId,reviewAdded }) => {
                 {/* {Object.keys(info).length !== 0 && <ReviewsUser info={info} />} */}
                 <BoardReview info={info} />
             </DivConteiner>
-            <GenericFooter />
+            {/* <GenericFooter /> */}
         </>
     )
 
