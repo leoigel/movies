@@ -58,9 +58,10 @@ const InformationMovie = ({ match }) => {
                     <Media params={match.params.movieId}/>
                     <Reviews info={info} reviewId={match.params.movieId}/>
                     <CommentBox comments={!getData.comments?data.comments:getData.comments}  post={!getData.post?data.post:getData.post}/>
-                    <GenericFooter />
+                    
                 </>
             ) : <DivLoading><CircularProgress disableShrink /></DivLoading>}
+            <GenericFooter />
         </>
     )
 }

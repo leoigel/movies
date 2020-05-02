@@ -30,7 +30,7 @@ function App() {
   const { windowDimensions } = useMovies();
   const { width } = windowDimensions;
   return (
-      <div className="App" style={{ position: 'relative', paddingBottom: '4rem' }}>
+      <div className="App">
         <Suspense fallback={<LinearProgress color="secondary" />}>
          
 

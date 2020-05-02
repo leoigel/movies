@@ -8,20 +8,21 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 const GenericFooter = () => {
     return (
-        <Footer>
-            <LinkTo href={`/resume.pdf`} download><ContactMailIcon /></LinkTo>
-            <LinkTo href={`https://github.com/leoigel/movies`}><GitHubIcon /></LinkTo>
-            <LinkTo href={`https://linkedin.com/in/leonardoigel`}><LinkedInIcon /></LinkTo>
-        </Footer>
+        <div style={{marginTop:'75px'}}>
+            <Footer>
+                <LinkTo href={`/resume.pdf`} download><ContactMailIcon /></LinkTo>
+                <LinkTo href={`https://github.com/leoigel/movies`}><GitHubIcon /></LinkTo>
+                <LinkTo href={`https://linkedin.com/in/leonardoigel`}><LinkedInIcon /></LinkTo>
+            </Footer>
+        </div>
     )
 }
 export default GenericFooter;
 
 const Footer = styled.footer`
 position: fixed;
-right: 0;
 bottom: 0;
-left: 0;
+width:100%;
 padding: 1rem 1rem 1rem 0.5rem;
 background-color: #efefef;
 text-align: center;
