@@ -48,20 +48,16 @@ const MoviesProvider = ({ children }) => {
             const data = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=d98ee9811e179187b61f0f6b83bb3918&language=en-US&sort_by=${sortInput}&page=${page}&year=${year}&with_genres=${genresData}`);
             const responseData = await data.json();
              newData.current.push(...responseData.results)
-           
-            // setInProp(!inProp)
-           
             setDataMovie((dataMovie) => {
                 return {
                     ...dataMovie,
                     page: page,
                     total_results: responseData.total_results,
                     totalPage: responseData.totalPage,
-                    results: newData.current.reverse(),
+                    results: newData.current,
                 }
 
             })
-            // selectYear(responseData.results, responseData)
             return () => {
                 console.log("cleaned up");
             
@@ -125,7 +121,6 @@ const MoviesProvider = ({ children }) => {
     }
 
     const pagination = (value, vBoleean) => {
-        // setInProp(vBoleean)
         setDataMovie(movie => {
             return {
                 ...movie,
