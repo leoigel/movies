@@ -1,9 +1,9 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { AppBar as AppBarMaterialUI } from '@material-ui/core';
 import useMovies from '../hooks/useMovies';
 import MenuLargeWidth from './MenuLargeWidth';
 import MenuSmallWidth from './MenuSmallWidth';
-import { withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Toolbar, Container, Typography as TypographyMaterialUI } from '@material-ui/core';
 
 import styled from 'styled-components';
@@ -15,14 +15,16 @@ const Menu = () => {
 
   const handleImage = () => {
     setClose(!open)
-}
+  }
   return (
     <>
-      <AppBar style={{background:'#000033'}}>
+      <AppBar style={{ background: '#000033' }}>
         <Container>
           <Div>
             <Toolbar>
-              <img src="https://www.themoviedb.org/assets/2/v4/logos/primary-green-d70eebe18a5eb5b166d5c1ef0796715b8d1a2cbc698f96d311d62f894ae87085.svg" alt='logo' width='81' />
+              <Link to='/'>
+                <img src="https://www.themoviedb.org/assets/2/v4/logos/primary-green-d70eebe18a5eb5b166d5c1ef0796715b8d1a2cbc698f96d311d62f894ae87085.svg" alt='logo' width='81' />
+              </Link>
             </Toolbar>
             <DropDown>
               <Typography>{localStorage.getItem('userName')}</Typography>
@@ -30,8 +32,8 @@ const Menu = () => {
                 <Img src={localStorage.getItem('upLoadedImage')} />
               </DivImg>
               {width >= 600 ? (
-                <MenuLargeWidth open={open}/>
-              ) : <MenuSmallWidth open={open}/>}
+                <MenuLargeWidth open={open} />
+              ) : <MenuSmallWidth open={open} />}
 
             </DropDown>
           </Div>
