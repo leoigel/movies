@@ -12,10 +12,6 @@ const InfiniteLoading = () => {
     const [scroll, setScroll] = useState(null);
     const [arrow, setArrow] = useState(false);
     
-
-
-
-
     const options = {
         root: null,
         rootMargin: '0px',
@@ -44,6 +40,7 @@ const InfiniteLoading = () => {
         }
         init()
     }, [scroll])
+    
     const slideUp = () => {
         window.scrollTo({
             top: 0,

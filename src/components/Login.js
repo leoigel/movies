@@ -68,6 +68,7 @@ const Login = ({ history }) => {
                         <Field
                             name="password"
                             className="Login-Field"
+                            type="password"
                         />
                         <ErrorMessage
                             component="span"
