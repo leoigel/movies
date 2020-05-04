@@ -3,6 +3,7 @@ import useMovies from '../hooks/useMovies';
 import Menu from './Menu'
 import moment from 'moment';
 import styled from 'styled-components';
+import  GenericFooter from './GenericFooter';
 import { H1 } from '../ui/ButtonFilter';
 import {
     Container as ContainerTest,
@@ -60,6 +61,7 @@ const FavoritePage = () => {
                     ) : <H1>There aren't favorites cards yet</H1>}
                 </Container>
             </HoldConteiner>
+            <GenericFooter />
         </>
     )
 }
