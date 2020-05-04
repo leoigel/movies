@@ -43,7 +43,7 @@ const FavoritePage = () => {
                             return (
                                 <CardsContainer key={card.id} width={width}>
                                     <ImgContainer>
-                                        {card.backdrop_path ? <img style={{ display: 'block', height: '274px', width: '100%', minWidth: '100%', borderRadius: '10px 10px 0px 0px' }} src={`${`https://image.tmdb.org/t/p/original/${card.backdrop_path}`}`} alt='card-img' /> : <ImgNotFound />}
+                                        {card.backdrop_path ? <img style={{ display: 'block', height: '274px', width: '100%', minWidth: '100%', borderRadius: '10px 10px 0px 0px',objectFit:'cover' }} src={`${`https://image.tmdb.org/t/p/original/${card.backdrop_path}`}`} alt='card-img' /> : <ImgNotFound />}
                                         <DeleteIcon className="far fa-trash-alt" onClick={() => deleteCard(card.id)}></DeleteIcon>
                                     </ImgContainer>
                                     <ContainerInformation>

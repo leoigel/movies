@@ -64,7 +64,7 @@ const Cards = ({ data }) => {
                                         ) : null}
                                     </div>
                                     <ImgContainer onClick={() => addCardToFavorite(card)}>
-                                        {card.backdrop_path ? <img style={{ display: 'block', height: '274px', width: '20px', minWidth: '100%', borderRadius: '10px 10px 0px 0px' }} src={`${`https://image.tmdb.org/t/p/original/${card.backdrop_path}`}`} alt='card-img' /> : <ImgNotFound />}
+                                        {card.backdrop_path ? <img style={{ display: 'block', height: '274px', width: '20px', minWidth: '100%', borderRadius: '10px 10px 0px 0px',objectFit:'cover' }} src={`${`https://image.tmdb.org/t/p/original/${card.backdrop_path}`}`} alt='card-img' /> : <ImgNotFound />}
                                         <HeartIcon>
                                             <i class="fas fa-thumbs-up"></i>
                                         </HeartIcon>
