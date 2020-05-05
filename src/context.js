@@ -54,7 +54,7 @@ const MoviesProvider = ({ children }) => {
                     page: page,
                     total_results: responseData.total_results,
                     totalPage: responseData.totalPage,
-                    results: newData.current,
+                    results: newData.current.reverse(),
                 }
 
             })
