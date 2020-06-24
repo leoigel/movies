@@ -40,7 +40,7 @@ const InfiniteLoading = () => {
         }
         init()
     }, [scroll])
-    
+
     const slideUp = () => {
         window.scrollTo({
             top: 0,
@@ -73,7 +73,6 @@ background-color: aqua;
 width: 40px;
 height: 40px;
 bottom: 10px;
-right: 20px;
 border-radius: 5px;
 border: none;
 

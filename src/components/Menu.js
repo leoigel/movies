@@ -49,7 +49,6 @@ export default Menu;
 const AppBar = styled(AppBarMaterialUI)`
 padding:10px;
 color:primary;
-// z-index:30000;
 `
 const Div = styled.div`
 display:flex;

@@ -82,9 +82,6 @@ display: inline-block;
 
 const Itens = styled.div`
 position: absolute;
-// border:2px solid red;
-// top:-39%;
-// left:50%;
 transform: translate(-70%, 25%);
 background-color: #f9f9f9;
 border-radius:9%;

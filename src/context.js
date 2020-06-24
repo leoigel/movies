@@ -49,7 +49,7 @@ const MoviesProvider = ({ children }) => {
             const data = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=d98ee9811e179187b61f0f6b83bb3918&language=en-US&sort_by=${sortInput}&page=${page}&year=${year}&with_genres=${genresData}`);
             const responseData = await data.json();
             newData.current.push(...responseData.results);
-            console.log(newData.current)
+
             setDataMovie((dataMovie) => {
                 return {
                     ...dataMovie,

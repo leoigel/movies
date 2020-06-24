@@ -7,6 +7,7 @@ import useMovies from '../hooks/useMovies';
 import Menu from './Menu';
 import Cards from './Cards';
 import ContainerFilter from './ContainerFilter';
+import GenericFooter from './GenericFooter';
 import InfiniteLoading from './InfiniteLoading';
 
 

@@ -30,12 +30,10 @@ box-shadow: 4px 1px 7px -3px rgba(0,0,0,0.47);
 width:${props =>
         props.width > 900 ? '200px' : 'calc(50% - 10px)'};
 height:350px;
-transition:transform 1s;
+transition:all 1s;
 &:hover {
-transform: scale(1.04);
-z-index:1000;
 box-shadow: 0px 10px 13px -7px #000000, 21px 0px 21px 1px rgba(0,0,0,0.09);
-
+}
 `
 const ConteinerContent = styled.div`
 display:flex;
@@ -121,7 +119,7 @@ right:-40px;
 border-radius:10px;
 overflow: visible;
 background:rgba(255,255,255,0.9);
-
+z-index:1000;
 `
 const VoteAverage = styled.div`
 position:absolute;
@@ -160,7 +158,6 @@ flex-direction:column;
 const Li = styled(ListItem).attrs({
     component:Link
 })`
-// padding:6px 8px 0px 8px;
 background-color:rgba(255,255,255,0.9);
 box-shadow: 0px 0px 2px #888888;
 font-weight:600;
