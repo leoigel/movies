@@ -4,31 +4,33 @@ import styled, { keyframes } from 'styled-components';
 import YouTube from 'react-youtube';
 
 function TrailerCard({ movie_video }) {
-    const opts = {
-        height: '180',
-        width: '100%',
-        playerVars: {
-            // https://developers.google.com/youtube/player_parameters
-            autoplay: 0
-        }
-    };
-    const _onReady = (event) => {
-        event.target.pauseVideo();
-    };
-    return (
-        <StyledTrailerWrapper >
-            {
-                movie_video? (
-                    < YouTube videoId={movie_video.key} opts={opts} onReady={_onReady} />
-                ): 
-                <NoTrailerFound >
-                    <p>Trailer is currently unavailable.</p>
-                    <img src={`https://www.like4like.org/img/blog/youtube-sad-face-128.jpg`} style={{margin:'10px'}}/>
-                </NoTrailerFound>
-            }
-
-        </StyledTrailerWrapper >
-    );
+  const opts = {
+    height: '180',
+    width: '100%',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 0,
+    },
+  };
+  const _onReady = (event) => {
+    event.target.pauseVideo();
+  };
+  return (
+    <StyledTrailerWrapper>
+      {movie_video ? (
+        <YouTube videoId={movie_video.key} opts={opts} onReady={_onReady} />
+      ) : (
+        <NoTrailerFound>
+          <p>Trailer is currently unavailable.</p>
+          <img
+            src={`https://www.like4like.org/img/blog/youtube-sad-face-128.jpg`}
+            style={{ margin: '10px' }}
+            alt="youtube-sad-face"
+          />
+        </NoTrailerFound>
+      )}
+    </StyledTrailerWrapper>
+  );
 }
 
 export default TrailerCard;
@@ -42,11 +44,10 @@ const fadeIn = keyframes`
 	}
 `;
 
-
 const NoTrailerFound = styled.div`
-	display:flex;
-    align-items:center;
+  display: flex;
+  align-items: center;
 `;
 const StyledTrailerWrapper = styled.div`
-    animation: ${fadeIn} 2s;
+  animation: ${fadeIn} 2s;
 `;

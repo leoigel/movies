@@ -1,98 +1,93 @@
-
 .Login {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content:center;
-    background: whitesmoke;
-    min-height: 100vh;
-    box-sizing: border-box;
-    padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: whitesmoke;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 20px;
 }
 
 .Login-Field {
-    border: none;
-    background: rgba(0, 0, 0, .25);
-    color: #fdfdfd;
-    margin-top: 1rem;
-    padding: 1rem;
-    font-size: 1.2rem;
-    border-radius: 7px;
-    display: block;
-    transition: all .1s linear;
+  border: none;
+  background: rgba(0, 0, 0, 0.25);
+  color: #fdfdfd;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1.2rem;
+  border-radius: 7px;
+  display: block;
+  transition: all 0.1s linear;
 }
 
 .Login-Field:focus {
-    box-shadow: 0 4px 4px rgba(0, 0, 0, .5);
-    outline: none;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+  outline: none;
 }
 
 .Login-Error {
-    color: #ff8080;
-    margin-top: 6px;
+  color: #ff8080;
+  margin-top: 6px;
 }
 
 .Login-Btn {
-    border: none;
-    background: rgba(0, 0, 0, .25);
-    color: #fdfdfd;
-    margin-top: 1rem;
-    padding: 1rem;
-    font-size: 1.2rem;
-    border-radius: 7px;
-    display: block;
-    transition: all .1s linear;
-    width: 250px;
-    margin-top:25px;
-    background: seagreen;
-    opacity: 0.8;
-    
+  border: none;
+  background: rgba(0, 0, 0, 0.25);
+  color: #fdfdfd;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1.2rem;
+  border-radius: 7px;
+  display: block;
+  transition: all 0.1s linear;
+  width: 250px;
+  margin-top: 25px;
+  background: seagreen;
+  opacity: 0.8;
 }
 .Login-Btn:hover {
-    background: #769ca1;
+  background: #769ca1;
 }
 
 .Login-Btn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 .upload-btn-wrapper {
-    position: relative;
-    overflow: hidden;
-    /* display: inline-block; */
-  }
-  
-  .btn {
-    border: 2px solid gray;
-    color: gray;
-    background-color: white;
-    padding: 8px 20px;
-    border-radius: 8px;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .upload-btn-wrapper input[type=file] {
-    font-size: 100px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-  }
+  position: relative;
+  overflow: hidden;
+  /* display: inline-block; */
+}
 
+.btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type='file'] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
 
 .upload-image {
-    width: 150px;
-    height: 150px; 
-    border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }
 .upload-image-wrapper {
-    width: 150px;
-    height: 150px;
-    border: solid 0.4px gray;
-    border-radius: 50%;
-    margin:10px 0px;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.8);
-    
+  width: 150px;
+  height: 150px;
+  border: solid 0.4px gray;
+  border-radius: 50%;
+  margin: 10px 0px;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.8);
 }
-

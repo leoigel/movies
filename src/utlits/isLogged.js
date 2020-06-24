@@ -1,3 +1,3 @@
 const isLogged = () => !!localStorage.getItem('email');
 
-export {isLogged}
+export { isLogged };

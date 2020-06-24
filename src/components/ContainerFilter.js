@@ -5,22 +5,20 @@ import Years from './Years';
 import Genres from './Genres';
 import SortBy from './SortBy';
 const ContainerFilter = () => {
-    return (
-        <Container>
-            <Years />
-            <SortBy />
-            <Genres />
-        </Container>
-    )
-
-}
+  return (
+    <Container>
+      <Years />
+      <SortBy />
+      <Genres />
+    </Container>
+  );
+};
 
 export default ContainerFilter;
 
-
 const Container = styled(ConteinerFilterMaterialUI)`
-display:flex;
-flex-wrap:wrap;
-justify-content:flex-start;
-margin:10px;
-`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 10px;
+`;
