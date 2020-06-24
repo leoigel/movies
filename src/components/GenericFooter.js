@@ -8,7 +8,7 @@ const GenericFooter = () => {
   return (
     <div style={{ marginTop: '75px' }}>
       <Footer>
-        <LinkTo href={`/myresume.pdf`} download>
+        <LinkTo href={`/Resume2020.pdf`} download>
           <ContactMailIcon />
         </LinkTo>
         <LinkTo href={`https://github.com/leoigel/movies`}>
